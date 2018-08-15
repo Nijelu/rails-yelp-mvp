@@ -1,0 +1,50 @@
+<h1><%= @restaurant.name %></h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Address</h2>
+  </div>
+  <div class="panel-body">
+    <%= @restaurant.address %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Phone Number</h2>
+  </div>
+  <div class="panel-body">
+    <%= @restaurant.phone_number %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Category</h2>
+  </div>
+  <div class="panel-body">
+    <%= @restaurant.category.capitalize %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Reviews</h2>
+  </div>
+  <div class="panel-body">
+    <%= simple_form_for [@restaurant, Review.new] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating, input_html: { min: '0', max: '5' } %>
+    <%= f.button :submit, class: 'btn-primary' %>
+    <% end %>
+  </div>
+
+  <ul class="list-group">
+    <% @restaurant.reviews.each do |review| %>
+      <li class="list-group-item">
+        <%= review.content %>
+        <span class="badge"><%= review.rating %></span>
+        </li>
+    <% end %>
+  </ul>
+</div>
